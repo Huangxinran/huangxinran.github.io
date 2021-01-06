@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>AS4 Parallax scrolling</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/shadow.css">
+
+
+    <style>
+        #div1 {
+            background-image: url("assets/pokemon.png");
+        }
+
+        
+        #div1{
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+
+
+</head>
+
+<body>
+
+    <div id="div1" class="container-fluid innershadow1" style="background-color:black;height:200vh;position:relative;">
+        <img class="scrollable dropshadow1" data-top=0 data-top2=70 data-left=25 data-left2=35 data-width=20 data-width2=30 src="assets/ball.png" style="position:absolute;width:10%;top:23%;left:29%;filter:grayscale(.3) blur(0px);">
+
+    </div>
+
+
+
+
+
+    <script>
+        $(document).ready(function() {
+            var winh = $(window).height();
+            $(window).scroll(function() {
+                var scrolled = $(window).scrollTop();
+                $(".scrollable").each(function() {
+                    var parent_pos = $(this).parent().offset().top;
+                    var next_pos = $(this).parent().next().offset().top;
+                    var parent_height = $(this).parent().height();
+                    var parent_scrolled = scrolled - $(this).parent().offset().top;
+                    if (parent_scrolled > 0 && scrolled < next_pos - winh) {
+
+                        if ($(this).attr("data-left")) {
+                            $(this).css('left', (($(this).data('left2') - $(this).data('left')) * parent_scrolled / winh + $(this).data('left')) + '%');
+                        }
+                        if ($(this).attr("data-top")) {
+                            $(this).css('top', (($(this).data('top2') - $(this).data('top')) * parent_scrolled / winh + $(this).data('top')) + '%');
+                        }
+                        if ($(this).attr("data-width")) {
+                            $(this).css('width', (($(this).data('width2') - $(this).data('width')) * parent_scrolled / winh + $(this).data('width')) + '%');
+                        }
+                    }
+                });
+            });//end of win scroll
+        });
+    </script>
+</body>
+    
+<head>
+    <style>
+        img {
+            width: 10%;
+            position: absolute;
+        }
+    </style>
+    <script   src="https://code.jquery.com/jquery-3.4.1.min.js"   integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="   crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+
+
+</head>
+
+<body>
+<div id="div1" class="container-fluid" style="background-color:whitesmoke;min-height:500px;"></div>
+<div id="div2" class="container-fluid" style="background-color:whitesmoke;min-height:1000px;position:relative;">
+    <img class="parallax" src="assets/baby2.jpg" data-pos="200" data-speed="1" style="left:20%;top:200px;">
+    <img class="parallax" src="assets/baby1.jpg" data-pos="300" data-speed=".55" style="left:40%;top:300px;">
+    <img class="parallax" src="assets/baby3.jpg" data-pos="400" data-speed=".45" style="left:60%;top:400px;">
+    <img class="parallax" src="assets/baby4.jpg" data-pos="500" data-speed=".35" style="left:80%;top:500px;">
+
+</div>
+<div class="container-fluid" style="background-color:whitesmoke;min-height: 1400px"></div>
+
+
+
+    <script>
+$(document).ready(function() {
+    var div2_pos = $("#div2").offset().top;
+    $(window).scroll(function() {
+        var scrolled = $(window).scrollTop();
+
+        if (scrolled > div2_pos) {
+            $(".parallax").each(function() {
+                $(this).css('top', ($(this).data("pos") + (scrolled-div2_pos) * $(this).data("speed")) + 'px');
+            });
+        }
+
+    });
+});
+    </script>
+    <div id="content" style="text-indent: 5%;position: absolute;left: 50%;top: 600%;height: 100px;width: 500px">可達鴨是有鴨嘴獸外貌特征的寶可夢。可達鴨的身體是黃色的，它的眼睛裏有極小的瞳孔。它的嘴巴是扁狀的，頭上有三條黑色的呆毛，四肢短壯，酷似河童。它有短小的尾巴和有蹼的腳掌。可達鴨平時經常頭痛，這使它經常忘記事情。可達鴨完全不具有進攻性，神情經常處於呆滯狀態。由於不受控制的念力力量，可達鴨經常頭痛到流淚。當頭痛達到某種程度時可以使出念力和石化功，隱藏著不可思議的能力，但使用時的力量不會留下來。另外，作為水屬性寶可夢，它還能學會水炮等水屬性招式和冰屬性招式。</p>
+</body>
+
+</html>

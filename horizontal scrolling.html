@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+    <title>AS3 horizontal scrolling</title>
+    <style>
+        .fix {
+            position: fixed;
+        }
+    </style>
+</head>
+
+<body>
+    <div style="min-height:100vh;background-image: url('assets/keyazaka.png');background-repeat: no-repeat;
+    background-attachment: fixed;background-position:center;background-size:cover;">
+        <div id="content" style="position: absolute;top: 45%;left: 35%;color: white;font-size: 60px">欅坂46大重组</div>
+        <div style="min-height: inherit;background-color:rgba(36, 47, 82, 0.6);"></div>
+    </div>
+    <div id="div1" style="height:100vh;">
+        <img id="img1_1" src="assets/change.jpg" data-speed=0.6 style="position:absolute;height:100vh;transition:transform 0.5s">
+    </div>
+
+
+
+    <div id="div3" style="height:4000px;width:100%;background-image: url('assets/sakura.jpg');background-repeat: no-repeat;
+    background-attachment: fixed;background-position:center;background-size:cover;">
+
+    </div>
+
+
+    <!--    <div id="#div4" style="min-height:4000px;background:linear-gradient(red, yellow)"></div>-->
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+
+
+    <script>
+        $(document).ready(function() {
+            var winw = $(window).width(),
+                winh = $(window).height();
+            var doch = $(document).height() - winh;
+            var div2top = $("#div2").offset().top,
+                div3top = $("#div3").offset().top;
+
+            $(window).scroll(function() {
+                var scrolled = $(window).scrollTop();
+                $("#img1_1").css('transform', "translate(" + (-scrolled / doch * $("#img1_1").width() * $("#img1_1").data("speed")) + "px)");
+
+
+
+
+                // if(div2top < scrolled && scrolled < div3top - winh){ // var update2_1=( 100 - (scrolled-div2top) / $( "#div2").height() * 100); // $( "#img2_1").css( 'transform', "translate(" + update2_1 + "vw)"); // $( "#img2_1").css( 'top', scrolled + "px"); // }
+            });
+        });
+    </script>
+</body>
+
+
+
+</html>
